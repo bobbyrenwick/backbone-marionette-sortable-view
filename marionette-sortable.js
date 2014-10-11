@@ -11,7 +11,8 @@ Marionette.SortableItemView = Marionette.ItemView.extend({
       "dragleave": "leave",
       "dragend": "leave",
       "dragover": "over",
-      "drop": "drop"
+      "drop": "drop",
+      "selectstart": "onSelectStart"
     },
 
     initialize: function(options) {
@@ -30,6 +31,12 @@ Marionette.SortableItemView = Marionette.ItemView.extend({
       e.dataTransfer.effectAllowed = "move";
       e.dataTransfer.dropEffect = "move";
       e.dataTransfer.setData('text', "Drag");
+    },
+
+    onSelectStart: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.el.dragDrop();
     },
 
     enter: function(e) {
